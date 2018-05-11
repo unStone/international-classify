@@ -1,4 +1,4 @@
-const { app, BrowserWindow, globalShortcut, clipboard } = require('electron');
+const { app, BrowserWindow, globalShortcut, clipboard, ipcMain } = require('electron');
 
 const path = require('path')
 const url = require('url')
@@ -18,12 +18,12 @@ function createWindow () {
   win.show()
 
   // 然后加载应用的 index.html。
-  win.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
-    protocol: 'file:',
-    slashes: true
-  }))
-
+  win.loadURL('http://localhost:1234')
+  // win.loadURL(url.format({
+  //   pathname: path.join(__dirname, 'dist/index.html'),
+  //   protocol: 'file:',
+  //   slashes: true
+  // }))
 
   // 打开开发者工具。
   win.webContents.openDevTools()
@@ -35,11 +35,6 @@ function createWindow () {
     // 与此同时，你应该删除相应的元素。
     win = null
   })
-
-  // // 
-  // win.on('blur', () => {
-  //   win.hide()
-  // })
 }
 
 app.on('ready', createWindow)
