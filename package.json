@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/unStone/international-classify/issues"
   },
-  "homepage": "https://github.com/unStone/international-classify#readme"
+  "homepage": "https://github.com/unStone/international-classify#readme",
+  "dependencies": {
+    "electron": "^2.0.0"
+  }
 }
