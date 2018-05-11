@@ -36,10 +36,10 @@ function createWindow () {
     win = null
   })
 
-  // 
-  win.on('blur', () => {
-    win.hide()
-  })
+  // // 
+  // win.on('blur', () => {
+  //   win.hide()
+  // })
 }
 
 app.on('ready', createWindow)
