@@ -1,0 +1,19 @@
+{
+  "name": "international-classify",
+  "version": "0.0.1",
+  "description": "international-classify",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unStone/international-classify.git"
+  },
+  "author": "ssstone",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/unStone/international-classify/issues"
+  },
+  "homepage": "https://github.com/unStone/international-classify#readme"
+}
