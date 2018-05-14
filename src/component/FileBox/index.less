@@ -1,0 +1,33 @@
+@fileBox-height: 180px;
+@fileBox-width: 140px;
+@name-height: 40px;
+
+
+.fileBox {
+  position: relative;
+  height: @fileBox-height;
+  width: @fileBox-width;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.fileName {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: @name-height;
+  padding: 0 8px;
+  line-height: @name-height;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background-color: #CCFF99;
+  text-align: center;
+}
+.fileContent {
+  position: absolute;
+  top: @name-height;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: #CCFFFF;
+}

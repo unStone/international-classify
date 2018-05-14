@@ -1,24 +1,17 @@
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
 import Loadable from 'react-loadable';
 
-const Loading = () => <div>Loading...</div>;
+import { pageLoadable } from '../util/loadable'
 
-const Home = Loadable({
-  loader: () => import('./Home'),
-  loading: Loading,
-});
+const Home = pageLoadable('../pages/Home');
+const Analy = pageLoadable('../pages/Analy');
 
-const About = Loadable({
-  loader: () => import('./About'),
-  loading: Loading,
-});
-
-const App = () => (
+const App = (
   <Router>
     <Switch>
       <Route exact path="/" component={Home}/>
-      <Route path="/about" component={About}/>
+      <Route path="/Analy" component={Analy}/>
     </Switch>
   </Router>
 );

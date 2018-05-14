@@ -11,9 +11,19 @@
       bottom: 0;
       left: 0;
     }
+    .full {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
   </style>
   <body>
-    <div id="app"></div>
+    <div id="app" class="full"></div>
+    <script>
+      const {ipcRenderer} = require('electron')
+    </script>
     <script src="./src/app.js"></script>
   </body>
 </html>
