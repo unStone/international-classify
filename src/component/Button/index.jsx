@@ -1,23 +1,23 @@
 import React from 'react';
 
-const baseStyle = {
-  padding: '4px 8px',
-  backgroundColor: 'yellow',
-  borderRadius: 5,
-}
+import './index.less';
+
+const buttonType = {
+  default: 'default',
+  submit: 'submit',
+};
 
 export default class Button extends React.Component {
-
   render() {
-    const { children, onClick } = this.props
+    const { children, onClick, type = 'default' } = this.props;
     
     return (
       <span
-        style={baseStyle}
+        className={buttonType[type]}
         onClick={onClick}
       >
         {children}
       </span>
-    )
+    );
   }
 }

@@ -14,3 +14,9 @@ export const dragOutFile = ({ path, name }) => {
     name,
   };
 };
+
+export const clearDragFile = () => {
+  return {
+    type: 'CLEAR_DRAG_FILE',
+  };
+};

@@ -5,13 +5,14 @@ import { limitReadStream } from '../../util/fs';
 import './index.less';
 
 export default class About extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   render() {
     const { style, name, content } = this.props;
 
+    console.log(123);
     return (
       <StyleRoot>
         <div className="fileBox" style={style}>

@@ -2,23 +2,25 @@ import React from 'react';
 // import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { istextfile, readFileSync } from '../util/fs';
-import { dragInFile } from '../redux/actions/dragFile';
+import { istextfile, readFile } from '../util/fs';
+import { dragInFile, clearDragFile } from '../redux/actions/dragFile';
 
 import './Home.less';
 
 const mapDispatchToProps = (dispatch) => {
   return {
     dispatchDragInFile: (file, content) => dispatch(dragInFile(file, content)),
+    dispatchClearDragFile: () => dispatch(clearDragFile()),
   };
 };
 
 class Home extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   componentDidMount() {
+    this.props.dispatchClearDragFile();
     const holder = this.refs;
 
     holder.ondragenter = holder.ondragover = (event) => {
@@ -37,8 +39,10 @@ class Home extends React.Component {
       const file = event.dataTransfer.files[0];
       if (!istextfile(file.path)) return;
       this.props.history.push('/analy/');
-      const content = readFileSync(file.path);
-      this.props.dispatchDragInFile(file, content);
+      readFile(file.path, '', (err, res) => {
+        if (err) return;
+        this.props.dispatchDragInFile(file, res.toString());
+      });
     };
   }
 

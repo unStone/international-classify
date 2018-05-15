@@ -1,4 +1,4 @@
-
+export const readline = window.require('readline');
 export const fs = window.require('fs');
 
 // 是否为文本类型
@@ -27,27 +27,43 @@ export const readFileSync = (path, options = 'utf-8') => {
   return fs.readFileSync(path, options);
 };
 
-
-export const limitReadStream = (path, limit = 1000, callback) => {
+export const limitReadStream = (path, Encoding = 'UTF8', callback) => {
   if (!path) return;
-  let data = '';
   // 创建可读流
   const readerStream = fs.createReadStream(path);
 
   // 设置编码为 utf8
-  readerStream.setEncoding('UTF8');
+  readerStream.setEncoding(Encoding);
 
   // 处理流事件 --> data, end, and error
   readerStream.on('data', (chunk) => {
-    data += chunk;
+    callback(null, chunk);
   });
 
   readerStream.on('end', () => {
-    console.log('data--------', data);
-    callback();
+    callback(null, null, 'true');
   });
 
   readerStream.on('error', (err) => {
+    callback(err, null);
     console.log(err.stack);
+  });
+};
+
+export const readLineOfFile = (path, callback) => {
+  if (!path) return;
+  
+  const input = fs.createReadStream(path);
+  const rl = readline.createInterface({
+    input,
+  });
+  rl.on('error', (line) => {
+    callback(null, line, false);
+  });
+  rl.on('line', (line) => {
+    callback(null, line, false);
+  });
+  rl.on('close', () => {
+    callback(null, null, true);
   });
 };

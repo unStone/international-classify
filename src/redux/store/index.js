@@ -1,15 +1,15 @@
-import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
-import * as reducer from '../reducers/index';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+import { createLogger } from 'redux-logger';
 
-// import thunk from 'redux-thunk';
-import {createLogger} from 'redux-logger';
+import * as reducer from '../reducers/index';
 
 const logger = createLogger();
 
-var store = createStore(
+const store = createStore(
   combineReducers(reducer),
   compose(
-    applyMiddleware(logger),
+    applyMiddleware(thunk, logger),
     window.devToolsExtension ? window.devToolsExtension() : f => f
   ),
 );
