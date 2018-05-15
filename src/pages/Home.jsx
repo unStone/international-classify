@@ -1,21 +1,21 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { fs, istextfile } from '../util/fs'
-import { dragInFile } from '../redux/actions/dragFile'
+import { istextfile, readFileSync } from '../util/fs';
+import { dragInFile } from '../redux/actions/dragFile';
 
-import './Home.less'
+import './Home.less';
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    dispatchDragInFile: (file)=> dispatch(dragInFile(file))
-  }
-}
+    dispatchDragInFile: (file, content) => dispatch(dragInFile(file, content)),
+  };
+};
 
 class Home extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   componentDidMount() {
@@ -24,8 +24,6 @@ class Home extends React.Component {
     holder.ondragenter = holder.ondragover = (event) => {
       // 重写ondragover 和 ondragenter 使其可放置
       event.preventDefault();
-
-      // holder.innerText="Release Mouse";
     };
 
     holder.ondragleave = (event) => {
@@ -37,21 +35,23 @@ class Home extends React.Component {
       event.preventDefault();
 
       const file = event.dataTransfer.files[0];
-      if(!istextfile(file.path)) return
-      this.props.dispatchDragInFile(file)
-      this.props.history.push('/analy/')
-    }
+      if (!istextfile(file.path)) return;
+      this.props.history.push('/analy/');
+      const content = readFileSync(file.path);
+      this.props.dispatchDragInFile(file, content);
+    };
   }
 
   render() {
     return (
-      <div className="Home full"
+      <div
+        className="Home full"
         ref={refs => this.refs = refs}
       >
         <div>请复制粘贴需要分类的国际化文本或拖入文件</div>
       </div>
-    )
+    );
   }
 }
 
-export default connect(() => ({}), mapDispatchToProps)(Home)
+export default connect(() => ({}), mapDispatchToProps)(Home);
