@@ -2,6 +2,7 @@ import React from 'react';
 import { bounceInDown } from 'react-animations';
 import Radium from 'radium';
 import { connect } from 'react-redux';
+import franc from 'franc-min';
 
 import Button from '../component/Button';
 import FileBox from '../component/FileBox';
@@ -10,6 +11,8 @@ import GoBack from '../component/GoBack';
 import { readLineOfFile } from '../util/fs'; 
 
 import './Analy.less';
+
+const whitelist = ['cmn', 'por', 'eng'];
 
 const animation = {
   bounceInDown: {
@@ -31,11 +34,11 @@ class Analy extends React.Component {
 
   cutApart() {
     readLineOfFile(this.props.dragFile.dragInFilePath, (err, line, isEnd) => {
-      console.log('err', err);
       if (err) return;
-      console.log('isEnd', isEnd);
       if (isEnd) return;
-      console.log('line', line);
+      // console.log('line', line.split(':')[1]);
+      const content = line.split(':')[1] && line.split(':')[1].replace(/['",]/g, '');
+      console.log('line', content, franc.all(`${content}${content}${content}${content}${content}${content}${content}${content}${content}`, { whitelist }));
     });
   }
 

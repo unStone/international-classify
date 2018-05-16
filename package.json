@@ -20,6 +20,7 @@
   "homepage": ".",
   "dependencies": {
     "electron": "^2.0.0",
+    "franc-min": "^4.0.0",
     "radium": "^0.24.0",
     "react-dom": "^16.3.2",
     "react-redux": "^5.0.7",
