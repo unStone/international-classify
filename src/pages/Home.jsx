@@ -1,9 +1,12 @@
 import React from 'react';
-// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { istextfile, readFile } from '../util/fs';
 import { dragInFile, clearDragFile } from '../redux/actions/dragFile';
+
+import Button from '../component/Button';
+import Modal from '../component/Modal';
+import Radio from '../component/Radio';
 
 import './Home.less';
 
@@ -15,9 +18,12 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 class Home extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      visible: false,
+    };
+  }
 
   componentDidMount() {
     this.props.dispatchClearDragFile();
@@ -46,13 +52,38 @@ class Home extends React.Component {
     };
   }
 
+  selectMode = () => {
+    this.setState({ visible: true });
+  }
+
+  handleCancel = () => {
+    this.setState({
+      visible: false,
+    });
+  }
+
+  handleOk = () => {
+    this.setState({
+      visible: false,
+    });
+  }
+
   render() {
     return (
       <div
         className="Home full"
-        ref={refs => this.refs = refs}
+        ref={refs => { this.refs = refs; }}
       >
         <div>请复制粘贴需要分类的国际化文本或拖入文件</div>
+        <Button onClick={this.selectMode}>选择模式</Button>
+        <Modal
+          visible={this.state.visible}
+          onCancel={this.handleCancel}
+          onOk={this.handleOk}
+        >
+          <Radio value={1}>简单规则</Radio>
+          <Radio value={2}>智能识别</Radio>
+        </Modal>
       </div>
     );
   }

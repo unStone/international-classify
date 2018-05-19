@@ -13,7 +13,7 @@ export default class Button extends React.Component {
     
     return (
       <span
-        className={buttonType[type]}
+        className={`${buttonType[type]} button`}
         onClick={onClick}
       >
         {children}
