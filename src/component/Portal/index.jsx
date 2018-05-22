@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-const IS_REACT_16 = 'createPortal' in ReactDOM;
+import PropTypes from 'prop-types';
 
 /**
  * 传送门组件，用于 modal 等
@@ -33,3 +32,14 @@ export default class Portal extends React.Component {
     return null;
   }
 }
+
+
+Portal.propTypes = {
+  children: PropTypes.node,
+  getContainer: PropTypes.func,
+};
+
+Portal.defaultProps = {
+  children: null,
+  getContainer: () => {},
+};

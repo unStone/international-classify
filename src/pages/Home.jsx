@@ -10,6 +10,8 @@ import Radio from '../component/Radio';
 
 import './Home.less';
 
+const Group = Radio.Group;
+
 const mapDispatchToProps = (dispatch) => {
   return {
     dispatchDragInFile: (file, content) => dispatch(dragInFile(file, content)),
@@ -21,7 +23,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      visible: false,
+      visible: true,
     };
   }
 
@@ -81,8 +83,10 @@ class Home extends React.Component {
           onCancel={this.handleCancel}
           onOk={this.handleOk}
         >
-          <Radio value={1}>简单规则</Radio>
-          <Radio value={2}>智能识别</Radio>
+          <Group defaultValue="simple" value={this.state.value}>
+            <Radio value="simple">简单规则</Radio>
+            <Radio value="intelligent">智能识别</Radio>
+          </Group>
         </Modal>
       </div>
     );
